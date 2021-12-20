@@ -23,6 +23,20 @@
     @endcan
     @can('show users')
     <div class="mb-4">
+        <small class="d-block text-secondary mb-2 text-uppercase">Roles & Permissions</small>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">
+                Create a User
+            </a>
+            <a href="{{ route('roles.index') }}" class="list-group-item list-group-item-action">Roles</a>
+            <a href="#" class="list-group-item list-group-item-action">Permissions</a>
+            <a href="#" class="list-group-item list-group-item-action">Assign Permission</a>
+        </div>
+    </div>
+    @endcan
+
+    @can('assign permission')
+    <div class="mb-4">
         <small class="d-block text-secondary mb-2 text-uppercase">Users</small>
         <div class="list-group">
             <a href="#" class="list-group-item list-group-item-action">
