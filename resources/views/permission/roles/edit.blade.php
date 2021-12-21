@@ -7,7 +7,7 @@
             <form action="{{ route('roles.edit', $role) }}" method="post">
                 @csrf
                 @method('PUT')
-                @include('permissions.roles.partials.form-control')
+                @include('permission.roles.partials.form-control')
             </form>
         </div>
     </div>

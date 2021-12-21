@@ -6,7 +6,7 @@
         <div class="card-body">
             <form action="{{ route('roles.create') }}" method="post">
                 @csrf
-                @include('permissions.roles.partials.form-control', ['submit' => 'Create'])
+                @include('permission.roles.partials.form-control', ['submit' => 'Create'])
             </form>
         </div>
     </div>
