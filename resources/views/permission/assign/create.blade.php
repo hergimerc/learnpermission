@@ -19,7 +19,7 @@
             {{ session('success') }}
         </div>
     @endif
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-header">Assign Permission</div>
         <div class="card-body">
             <form action="{{ route('assign.create') }}" method="post">
@@ -49,6 +49,29 @@
                 </div>
                 <button class="btn btn-secondary">Assign</button>
             </form>
+        </div>
+    </div>
+
+    <div class="card-">
+        <div class="card-header">Table of Role & Permission</div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Guard Name</th>
+                    <th>The Permissions</th>
+                </tr>
+
+                @foreach ($roles as $index => $role)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $role->name }}</td>
+                        <td>{{ $role->guard_name }}</td>
+                        <td>{{ implode(', ', $role->getPermissionNames()->toArray()) }}</td>
+                    </tr>
+                @endforeach
+            </table>
         </div>
     </div>
 @endsection
