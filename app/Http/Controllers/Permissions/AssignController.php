@@ -28,4 +28,25 @@ class AssignController extends Controller
 
         return back()->with('success', "Permission has been assigned to the role {$role->name}");
     }
+
+    public function edit(Role $role)
+    {
+        return view('permission.assign.sync', [
+            'role' => $role,
+            'roles' => Role::get(),
+            'permissions' => Permission::get(),
+        ]);
+    }
+
+    public function update(Role $role)
+    {
+        request()->validate([
+            'role' => 'required',
+            'permissions' => 'array|required'
+        ]);
+
+        $role->syncPermissions(request('permissions'));
+
+        return redirect()->route('assign.create')->with('success', 'The permissions have been synced.');
+    }
 }
