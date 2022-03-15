@@ -23,6 +23,18 @@
     @endcan
     @can('show users')
     <div class="mb-4">
+        <small class="d-block text-secondary mb-2 text-uppercase">Users</small>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">
+                Create a User
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">Data Table User</a>
+        </div>
+    </div>
+    @endcan
+
+    @can('assign permission')
+    <div class="mb-4">
         <small class="d-block text-secondary mb-2 text-uppercase">Roles & Permissions</small>
         <div class="list-group">
             <a href="#" class="list-group-item list-group-item-action">
@@ -36,14 +48,11 @@
     </div>
     @endcan
 
-    @can('assign permission')
+    @can('create navigation')
     <div class="mb-4">
-        <small class="d-block text-secondary mb-2 text-uppercase">Users</small>
+        <small class="d-block text-secondary mb-2 text-uppercase">Navigation Setup</small>
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">
-                Create a User
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">Data Table User</a>
+            <a href="{{ route('navigation.create') }}" class="list-group-item list-group-item-action">Create new Navigation</a>
         </div>
     </div>
     @endcan
