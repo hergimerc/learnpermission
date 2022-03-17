@@ -8,6 +8,12 @@ use Spatie\Permission\Models\Permission;
 
 class NavigationController extends Controller
 {
+    public function table()
+    {
+        $navigations = Navigation::whereNotNull('url')->get();
+        return view('navigation.table', compact('navigations'));
+    }
+
     public function create()
     {
         $permissions = Permission::get();
