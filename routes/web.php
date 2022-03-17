@@ -21,10 +21,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware('has.role')->prefix('xyz')->group(function () {
+Route::middleware('has.role')->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::middleware('permission:create post')->group(function () {
+        Route::view('posts/create', 'posts.create');
+        Route::view('posts/table', 'posts.table');
+        Route::view('categories/create', 'categories.create');
+        Route::view('categories/table', 'categories.table');
+    });
 
-    Route::prefix('role-and-permission')->namespace('Permissions')->group(function () {
+    Route::prefix('role-and-permission')->namespace('Permissions')->middleware('permission: assign permission')->group(function () {
         Route::get('assignable', 'AssignController@create')->name('assign.create');
         Route::post('assignable', 'AssignController@store');
         Route::get('assignable/{role}/edit', 'AssignController@edit')->name('assign.edit');
