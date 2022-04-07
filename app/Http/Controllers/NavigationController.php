@@ -18,8 +18,9 @@ class NavigationController extends Controller
     {
         $permissions = Permission::get();
         $navigations = Navigation::where('url', null)->get(); // Hanya menampilkan navigation yang tidak memiliki URL alias parent (tidak memiliki children)
+        $submit = 'Create';
 
-    return view('navigation.create', compact('permissions', 'navigations'));
+    return view('navigation.create', compact('permissions', 'navigations', 'submit'));
     }
 
     public function store()
@@ -37,5 +38,33 @@ class NavigationController extends Controller
         ]);
 
         return back();
+    }
+
+    public function edit(Navigation $navigation)
+    {
+        $submit = 'Update';
+        $permissions = Permission::get();
+        $navigations = Navigation::where('url', null)->get();
+
+        return view('navigation.edit', compact('navigation', 'navigations', 'permissions', 'submit'));
+    }
+
+    public function update(Navigation $navigation)
+    {
+        $navigation->update([
+            'name' => request('name'),
+            'url' => request('url') ?? null,
+            'parent_id' => request('parent_id') ?? null,
+            'permission_name' => request('permission_name'),
+        ]);
+
+        return redirect()->route('navigation.table');
+    }
+
+    public function destroy(Navigation $navigation)
+    {
+        $navigation->delete();
+
+        return redirect()->route('navigation.table');
     }
 }
